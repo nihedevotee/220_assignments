@@ -1,0 +1,123 @@
+CSE 220 ASSIGNMENT 1
+
+#TASK1
+
+public static void mostWater( Integer[] height ){
+        int i=0;
+        int j=height.length-1;
+        int a=0;
+        // int left=0;
+        // int right=height.length-1;
+        int maxarea=0;
+       
+        while(i<j){
+
+            if (height[i]>height[j]){
+                a=(j-i)*height[j--];
+            }
+            else{
+                a=(j-i)*height[i++];
+                
+            }
+            if (maxarea<a){
+                maxarea=a;
+            }
+        }
+       
+        System.out.println(maxarea);
+    }
+
+#TASK2
+
+public static Integer rowRotation( Integer examWeek, String[][] matrix ){
+        int ind=0;
+        int count=1;
+        
+        while(examWeek>count){
+            count++;
+
+            for(int i=matrix.length-1;i>0;i--){
+                for(int j=0;j<matrix[i].length;j++){
+                    String temp=matrix[i][j];
+                    matrix[i][j]=matrix[i-1][j];
+                    matrix[i-1][j]=temp;
+                }
+            }
+            for(int i=0; i<matrix.length; i++){
+                for (int j=0; j<matrix[0].length; j++){
+                    if (matrix[i][j].equals("AA")){
+                      ind=i+1;
+                    }
+                }
+            }
+        }
+
+        Arr.print2D(matrix);
+        
+        //TO DO
+        return ind;
+    }
+
+
+#TASK3
+public static Integer[][] compressMatrix( Integer[][] matrix ){
+
+        Integer [][] mat= new Integer[matrix.length/2][matrix.length/2];
+        int sum=0;
+        int [] arr= new int [matrix.length];
+        int count= 0;
+        int con=0;
+       
+            for (int i=0; i<matrix.length; i=i+2){
+                for(int j=0;j<matrix[i].length; j=j+2){
+                    sum=matrix[i][j]+matrix[1+i][j]+matrix[i][j+1]+matrix[i+1][1+j];
+                    //mat[r++][c++]=sum;
+                    arr[count++]=sum;
+                }
+           }
+
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                mat[i][j]=arr[con++];
+            }
+        }
+        return mat;
+    }
+
+#TASK4
+public static void playGame( Integer[][] arena ){
+        int row=arena.length;
+        int col= arena[0].length;
+        int sum=0;
+
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(arena[i][j]%50==0 && arena[i][j]>0){
+                   
+                    if(i>0 && arena[(i)-1][j]==2){
+                        sum=sum+2;
+                   
+                    }
+                   
+                    if(i<row-1 && arena[i+1][j]==2){
+                        sum=sum+2;
+                    }
+                   
+                    if(j>0 && arena[i][(j)-1]==2){
+                        sum=sum+2;
+                    }
+                   
+                    if(j<col-1 && arena[i][j+1]==2){
+                        sum=sum+2;
+                   
+                    }
+                }
+            }
+        }
+        if(sum<10){
+            System.out.println("Points Gained: "+sum+". Your team is out.");
+        }
+        else{
+            System.out.println("Points Gained: "+sum+". Your team has survived the game.");
+        }
+    }

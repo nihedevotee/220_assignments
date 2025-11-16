@@ -1,0 +1,175 @@
+//TASK2
+
+public class assign9_task2{
+    public static int sumofedge2d(int [][]gra){
+        int max=Integer.MIN_VALUE;
+        int ver=0;
+
+        for (int i = 0; i < gra.length; i++) {
+            int sum=0;
+            for (int j = 0; j < gra[i].length; j++) {
+                sum += gra[i][j];
+            }
+            if (sum>max){
+                max=sum;
+                ver=i;
+            }
+        }
+        return ver; 
+    }
+     public static int sumofedgeL(Edge[] adjList) {
+        int max=Integer.MIN_VALUE;
+        int ver=0;
+
+        for (int i=0; i<adjList.length; i++) {
+            int sum=0;
+            Edge temp=adjList[i];
+
+            while (temp != null) {
+                sum +=temp.weight;
+                temp =temp.next;
+            }
+
+            if (sum >max) {
+                max =sum;
+                ver =i;
+            }
+        }
+        return ver; 
+    }
+}
+
+//TASK3
+
+public class assign9_task3{
+    
+    //TASK 1 VERSION
+
+    public static int maxDegree2d(int [][]graDW){
+        int count=0;
+        int max=Integer.MIN_VALUE;
+        //int store=0;
+
+        for (int i = 0; i < graDW.length; i++) {
+            count=0;
+            for (int j = 0; j < graDW[i].length; j++) {
+                if(graDW[i][j] !=0){
+                    count++;
+                } 
+            }
+            if (count>max){
+                max=count;
+                //store=graDW[i][j];
+            }
+        }
+        return max; 
+    }
+
+    public static int maxDegreeL(Edge[] adjListDW) {
+        int max=Integer.MIN_VALUE;
+        int count=0;
+        //Edge store;
+
+        for (int i=0; i<adjList.length; i++) {
+            //int sum = 0;
+            count=0;
+            Edge temp=adjList[i];
+
+            while (temp != null) {
+                count++;
+                temp=temp.next;
+            }
+
+            if (count>max){
+                max=count;
+                //store=graDW[i][j];
+            }
+        }
+        return max; 
+    }
+    
+    //TASK 2 VERSION
+
+    public static int sumofedge2d(int [][]graDW){
+        int max=Integer.MIN_VALUE;
+        int ver=0;
+
+        for (int i = 0; i < graDW.length; i++) {
+            int sum=0;
+            for (int j = 0; j < graDW[i].length; j++) {
+                sum += graDW[i][j];
+            }
+            if (sum>max){
+                max=sum;
+                ver=i;
+            }
+        }
+        return ver; 
+    }
+    public static int sumofedgeL(Edge[] adjListDW) {
+        int max=Integer.MIN_VALUE;
+        int ver=0;
+
+        for (int i=0; i<adjListDW.length; i++) {
+            int sum=0;
+            Edge temp=adjListDW[i];
+
+            while (temp != null) {
+                sum +=temp.weight;
+                temp =temp.next;
+            }
+
+            if (sum >max) {
+                max =sum;
+                ver =i;
+            }
+        }
+        return ver; 
+    }
+}
+
+//TASK 4
+
+public class assign9_task4{
+
+    public static void direct_indirect_2d(int [][]graDW){
+        for (int i = 0; i < graDW.length; i++) {
+            for (int j = 0; j < graDW[i].length; j++) {
+                if(graDW[i][j] !=0){
+                    graDW[j][i]=graDW[i][j];
+                } 
+            } 
+        }
+    }
+    public static void direct_indirect_L(Edge[] adjListDW) {
+        Boolean flag=false;
+        
+        for (int i = 0; i < adjListDW.length; i++) {
+            Edge temp = adjListDW[i];
+
+            while (temp != null) {
+                Edge t1=adjListDW[temp.des];
+                
+                flag=true;
+
+                while(t1!=null){
+                    if(t1.des == temp.src){
+                        flag=false;
+                        break;
+                    }
+                    //else{flag=false;}
+                    t1=t1.next;
+                }
+                
+                if (flag==true){
+                    Edge newN= new Edge(temp.des, temp.src, temp.weight);
+                    newN.next=adjListDW[temp.des];
+                    adjListDW[temp.des]=newN;
+                }
+                
+                temp = temp.next;
+            }
+        }
+    }
+
+}

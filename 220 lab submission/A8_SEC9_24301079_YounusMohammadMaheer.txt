@@ -1,0 +1,32 @@
+//TASK3
+public static int[] task3(int [] arr, int m){
+    MinHeap minHeap = new MinHeap(m);
+    //int heap[]=new int [m];
+    for(int count=0; count<m; count++){
+        minHeap.insert(0);
+    }
+    
+    for(int i=0; i<arr.length; i++){
+        minHeap.insert(minHeap.extractMin()+arr[i]);
+    }
+    
+    int [] array = new int [m];
+    for(int i=0; i<array.length; i++){
+        array[i]=minHeap.extractMin();
+    }
+
+    return array;
+}
+
+//TASK4
+public int [] task4(int [] arr, int k){
+    MaxHeap maxHeap = new MaxHeap(k+1);
+    for(int i=0; i<k; i++){
+        maxHeap.insert(arr[i]);
+    }
+    int []array= new int [k];
+    for(int i=0; i<k; i++){
+        array[i]=maxHeap.extractMax();
+    }
+    return array;   
+}
